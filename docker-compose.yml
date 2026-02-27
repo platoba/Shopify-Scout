@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  bot:
+    build: .
+    container_name: shopify-scout
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - scout-data:/app/data
+    environment:
+      - MONITOR_DB=/app/data/monitor.db
+    networks:
+      - scout-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: scout-redis
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    networks:
+      - scout-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+volumes:
+  scout-data:
+  redis-data:
+
+networks:
+  scout-net:
+    driver: bridge

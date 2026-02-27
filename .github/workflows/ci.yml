@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install ruff
+          pip install -r requirements.txt
+
+      - name: Lint with ruff
+        run: ruff check . --select E,F,W
+
+      - name: Run tests
+        run: pytest tests/ -v --tb=short --co -q 2>/dev/null; pytest tests/ -v --tb=short
+        env:
+          BOT_TOKEN: test_token
+          MONITOR_DB: /tmp/test_monitor.db
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t shopify-scout .
