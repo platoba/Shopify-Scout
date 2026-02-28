@@ -1,92 +1,110 @@
-# Shopify Scout 🔍
+# Shopify Scout v2.0.0 🔍
 
-AI-powered Shopify store analyzer, product research & competitor monitoring via Telegram Bot.
+AI-powered Shopify store analysis, competitive intelligence, and niche opportunity detection.
 
 ## Features
 
-- 📊 **Deep Store Analysis** — products, pricing distribution (P25/P50/P75), categories, tags, vendors, launch trends
-- 🧠 **AI Product Advice** — niche analysis, pricing strategy, opportunities, competitive scoring
-- 📈 **Competitor Comparison** — side-by-side metrics with AI-powered differentiation advice
-- ⭐ **Competitiveness Scoring** — automated 1-10 scoring with detailed reasoning
-- 👀 **Persistent Monitoring** — SQLite-backed store tracking with change detection (new/removed products)
-- 🔗 **Auto-detect** — just paste a Shopify URL, no commands needed
+### Core Analysis
+- 📊 **Store Analysis** - Full product catalog analysis with pricing, categories, vendors, and scoring
+- 🔍 **Multi-Store Comparison** - Side-by-side competitive analysis with rankings and gap detection
+- 🎯 **Niche Analysis** - Market positioning, opportunity scoring, and strategic recommendations
+- 🔧 **Tech Stack Detection** - Identify Shopify themes, apps, payment gateways, and integrations
+
+### Monitoring & Alerts
+- 👁️ **Store Monitoring** - Track product changes with SQLite persistence
+- 🔔 **Change Detection** - Alerts for new/removed products and price changes
+
+### Export & Reporting
+- 📄 **Multi-format Export** - JSON, CSV, HTML reports
+- 📊 **HTML Reports** - Beautiful visual reports with charts and tag clouds
+- 📋 **Batch Analysis** - Process multiple stores from file
+
+### AI Features
+- 🤖 **AI Advisor** - GPT-powered product selection advice
+- 💡 **Smart Recommendations** - Actionable insights based on data analysis
+
+## Quick Start
+
+```bash
+# Install
+pip install -e ".[dev]"
+
+# Analyze a store
+shopify-scout analyze allbirds.com
+
+# Compare stores
+shopify-scout compare allbirds.com gymshark.com fashionnova.com
+
+# Niche analysis
+shopify-scout niche allbirds.com
+
+# Export report
+shopify-scout export allbirds.com -f html -o report.html
+
+# Batch analyze
+shopify-scout batch stores.txt -d reports/
+```
+
+## Telegram Bot
+
+```bash
+# Set environment variables
+export BOT_TOKEN=your_telegram_bot_token
+export OPENAI_API_KEY=your_openai_key
+
+# Run bot
+python bot.py
+```
+
+### Bot Commands
+- `/start` - Welcome message
+- `/scan <domain>` - Full store analysis
+- `/compare <domain1> <domain2>` - Compare stores
+- `/niche <domain>` - Niche analysis
+- `/watch <domain>` - Monitor store changes
+- `/unwatch <domain>` - Stop monitoring
+- `/list` - List watched stores
+
+## Docker
+
+```bash
+# Build and run
+docker compose up -d
+
+# Run tests
+docker compose run --rm test
+```
 
 ## Architecture
 
 ```
 app/
-├── config.py          # Environment-based configuration
-├── scraper.py         # Shopify store scraper with retry/proxy support
-├── analyzer.py        # Price/category/trend/score analysis engine
-├── ai_advisor.py      # OpenAI-compatible AI product advice
-├── monitor.py         # SQLite-backed store monitoring + change detection
-└── telegram_bot.py    # Telegram bot command handlers
-tests/
-├── test_scraper.py    # Scraper unit tests
-├── test_analyzer.py   # Analyzer unit tests (15 tests)
-└── test_monitor.py    # Monitor unit tests (11 tests)
-```
-
-## Quick Start
-
-```bash
-git clone https://github.com/platoba/Shopify-Scout.git
-cd Shopify-Scout
-cp .env.example .env
-# Edit .env with your BOT_TOKEN and OPENAI_API_KEY
-pip install -r requirements.txt
-python bot.py
-```
-
-### Docker
-
-```bash
-cp .env.example .env
-# Edit .env
-docker compose up -d
-```
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `/scan <url>` | Full store analysis with pricing, categories, trends |
-| `/advice <url>` | AI-powered product recommendations |
-| `/compare <url1> <url2> ...` | Compare up to 5 stores with AI analysis |
-| `/score <url>` | Quick competitiveness score (1-10) |
-| `/watch <url>` | Add store to persistent monitoring |
-| `/unwatch <url>` | Remove store from monitoring |
-| `/watched` | List all monitored stores |
-
-## How It Works
-
-Uses Shopify's public `/products.json` endpoint (no API key needed) to analyze:
-- Product count & pricing distribution (min/max/avg/median/quartiles)
-- Category breakdown & popular tags
-- Vendor analysis
-- New product launch frequency (7d/30d/90d trends)
-- Collection structure
-- Automated competitiveness scoring
-
-### Proxy Support
-
-Set `PROXY_URL` in `.env` for SOCKS5/HTTP proxy support:
-```
-PROXY_URL=socks5://user:pass@host:port
+├── analyzer.py        # Price/category/trend analysis engine
+├── comparator.py      # Multi-store comparison engine
+├── niche_analyzer.py  # Niche scoring & opportunity detection
+├── tech_detector.py   # Theme/app/payment detection
+├── exporter.py        # JSON/CSV/HTML export engine
+├── scraper.py         # Shopify API scraper with retry
+├── monitor.py         # SQLite-based store monitoring
+├── ai_advisor.py      # AI-powered recommendations
+├── telegram_bot.py    # Telegram bot handlers
+├── cli.py             # CLI tool (5 commands)
+└── config.py          # Environment configuration
 ```
 
 ## Testing
 
 ```bash
-pytest tests/ -v
+# Run all tests
+make test
+
+# With coverage
+make test-cov
+
+# Lint
+make lint
 ```
 
 ## License
 
 MIT
-
-## 🔗 Related
-
-- [MultiAffiliateTGBot](https://github.com/platoba/MultiAffiliateTGBot) — Affiliate link bot
-- [AI-Listing-Writer](https://github.com/platoba/AI-Listing-Writer) — AI listing generator
-- [Amazon-SP-API-Python](https://github.com/platoba/Amazon-SP-API-Python) — Amazon SP-API SDK
