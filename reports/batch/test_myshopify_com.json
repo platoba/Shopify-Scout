@@ -1,0 +1,45 @@
+{
+  "domain": "test.myshopify.com",
+  "product_count": 3,
+  "prices": {
+    "min": 35.0,
+    "max": 149.0,
+    "avg": 94.33333333333333,
+    "median": 99.0,
+    "count": 3,
+    "p25": 35.0,
+    "p75": 149.0
+  },
+  "categories": {
+    "Shoes": 2,
+    "Apparel": 1
+  },
+  "tags": {
+    "tag1": 2,
+    "tag2": 1
+  },
+  "vendors": {
+    "Brand": 2,
+    "Other": 1
+  },
+  "trend": {
+    "newest": "2025-12-01T00:00:00+00:00",
+    "oldest": "2025-10-01T00:00:00+00:00",
+    "last_7d": 0,
+    "last_30d": 0,
+    "last_90d": 1,
+    "avg_per_month": 0.6
+  },
+  "collections": [
+    {
+      "title": "All",
+      "id": 1
+    }
+  ],
+  "score": {
+    "score": 4.0,
+    "reasons": [
+      "产品过少(3)"
+    ]
+  }
+}

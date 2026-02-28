@@ -1,0 +1,12 @@
+{
+  "total": 1,
+  "successful": 1,
+  "stores": [
+    {
+      "domain": "test.myshopify.com",
+      "product_count": 3,
+      "score": 4.0,
+      "avg_price": 94.33
+    }
+  ]
+}
