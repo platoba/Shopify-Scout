@@ -272,3 +272,45 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main() or 0)
+
+
+def cmd_traffic(args):
+    """Estimate store traffic from public signals."""
+    from app.traffic_estimator import TrafficEstimator
+    
+    domain = normalize_domain(args.domain)
+    print(f"🔍 Fetching data from {domain}...")
+    
+    data = fetch_store_data(domain)
+    if data["product_count"] == 0:
+        print(f"❌ No products found for {domain}")
+        return 1
+    
+    estimator = TrafficEstimator(data)
+    result = estimator.estimate_traffic()
+    
+    print(f"\n📊 Traffic Estimate for {domain}")
+    print(f"{'='*50}")
+    print(f"Monthly Visitors: {result['monthly_visitors']:,}")
+    print(f"Daily Visitors: {result['daily_visitors']:,}")
+    print(f"Traffic Tier: {result['traffic_tier']}")
+    print(f"Confidence: {result['confidence']}%")
+    print(f"\n🔍 Signals Used:")
+    for key, value in result['signals_used'].items():
+        if isinstance(value, dict):
+            print(f"  {key}: {json.dumps(value, indent=4)}")
+        else:
+            print(f"  {key}: {value}")
+    
+    if args.output:
+        with open(args.output, 'w') as f:
+            json.dump(result, f, indent=2)
+        print(f"\n✅ Report saved to {args.output}")
+    
+    return 0
+
+    # traffic
+    p_traffic = subparsers.add_parser("traffic", help="Estimate store traffic")
+    p_traffic.add_argument("domain", help="Store domain (e.g. allbirds.com)")
+    p_traffic.add_argument("-o", "--output", help="Output JSON file path")
+    p_traffic.set_defaults(func=cmd_traffic)
