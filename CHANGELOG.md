@@ -1,3 +1,20 @@
+## v5.0.0 (2026-03-02)
+
+### New Module: Traffic Estimator 📊
+- **`traffic_estimator.py`** — Heuristic-based traffic estimation engine
+  - Multi-signal collection: review counts, product activity, variant complexity
+  - Weighted algorithm for monthly visitor estimation with confidence scoring
+  - Traffic tier classification (Micro → Enterprise)
+  - Multi-store traffic comparison and ranking
+  - CLI command: `shopify-scout traffic <domain>`
+  
+### Use Cases
+- Competitive traffic analysis without third-party tools
+- Product selection validation (traffic = market proof)
+- Multi-store benchmarking (identify highest-traffic competitors)
+
+### Testing
+- 4 new test cases in `test_traffic_estimator.py` (100% pass rate)
 # Changelog
 
 ## v4.0.0 (2026-03-01)
