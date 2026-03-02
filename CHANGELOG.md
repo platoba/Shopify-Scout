@@ -1,3 +1,27 @@
+## v6.0.0 (2026-03-02)
+
+### New Module: Price Optimizer 💰
+- **`price_optimizer.py`** — 竞品价格监控+自动降价建议引擎
+  - 竞品价格分析：按类别匹配同类产品，计算市场均价/最低价/最高价
+  - 智能定价策略：保守模式（略低于均价）vs 激进模式（比最低价再低5%）
+  - 市场位置分析：premium/competitive/budget 三档定位
+  - 紧急度评分：high/medium/low 优先级排序
+  - 置信度评估：0-1 置信度评分
+  - 多格式导出：JSON报告 + CSV批量导入表格
+  - CLI命令：`shopify-scout optimize-pricing <own_domain> <competitor1> <competitor2> ...`
+
+### Use Cases
+- 电商运营：实时监控竞品价格，自动生成降价建议
+- 价格战：激进模式快速抢占市场份额
+- 利润优化：保守模式保持竞争力同时维持利润率
+- 批量调价：CSV导出后直接导入Shopify后台
+
+### Testing
+- 4 new test cases in `test_price_optimizer.py` (100% pass rate)
+- Competitive pricing analysis validation
+- Aggressive vs conservative mode comparison
+- Report generation and CSV export
+
 ## v5.0.0 (2026-03-02)
 
 ### New Module: Traffic Estimator 📊

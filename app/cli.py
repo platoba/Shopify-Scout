@@ -1,3 +1,64 @@
+
+def cmd_optimize_pricing(args):
+    """价格优化命令"""
+    from app.scraper import ShopifyScraper
+    from app.price_optimizer import PriceOptimizer
+    
+    print(f"🔍 Analyzing pricing for {args.own_domain} vs competitors...")
+    
+    scraper = ShopifyScraper()
+    
+    # 抓取自己店铺
+    own_products = scraper.scrape_products(args.own_domain)
+    print(f"✅ Scraped {len(own_products)} products from {args.own_domain}")
+    
+    # 抓取竞品店铺
+    all_competitor_products = []
+    for competitor_domain in args.competitor_domains:
+        competitor_products = scraper.scraper_products(competitor_domain)
+        all_competitor_products.extend(competitor_products)
+        print(f"✅ Scraped {len(competitor_products)} products from {competitor_domain}")
+    
+    # 价格优化分析
+    optimizer = PriceOptimizer(
+        target_margin=args.margin,
+        aggressive_mode=args.aggressive
+    )
+    
+    recommendations = optimizer.analyze_competitive_pricing(
+        own_products,
+        all_competitor_products
+    )
+    
+    # 生成报告
+    report = optimizer.generate_pricing_report(recommendations)
+    
+    print(f"\n📊 Pricing Optimization Report")
+    print(f"Total Products Analyzed: {report['summary']['total_products']}")
+    print(f"High Urgency: {report['summary']['high_urgency']}")
+    print(f"Medium Urgency: {report['summary']['medium_urgency']}")
+    print(f"Low Urgency: {report['summary']['low_urgency']}")
+    print(f"Avg Price Change: {report['summary']['avg_price_change_pct']:+.2f}%")
+    
+    print(f"\n🎯 Top Recommendations:")
+    for rec in recommendations[:5]:
+        print(f"\n  {rec['product_title']}")
+        print(f"  Current: ${rec['current_price']:.2f} → Recommended: ${rec['recommended_price']:.2f} ({rec['price_change_pct']:+.2f}%)")
+        print(f"  Reason: {rec['reason']}")
+        print(f"  Urgency: {rec['urgency']} | Confidence: {rec['confidence']:.0%}")
+    
+    # 导出
+    if args.output:
+        if args.format == 'json':
+            with open(args.output, 'w') as f:
+                json.dump(report, f, indent=2)
+        elif args.format == 'csv':
+            from app.price_optimizer import PriceRecommendation
+            recs = [PriceRecommendation(**r) for r in report['recommendations']]
+            optimizer.export_csv(recs, args.output)
+        print(f"\n✅ Report saved to {args.output}")
+    
+    return 0
 """CLI tool for Shopify Scout - command-line store analysis."""
 import argparse
 import sys
@@ -314,3 +375,13 @@ def cmd_traffic(args):
     p_traffic.add_argument("domain", help="Store domain (e.g. allbirds.com)")
     p_traffic.add_argument("-o", "--output", help="Output JSON file path")
     p_traffic.set_defaults(func=cmd_traffic)
+
+    # optimize-pricing
+    p_optimize = subparsers.add_parser("optimize-pricing", help="Competitive pricing optimization")
+    p_optimize.add_argument("own_domain", help="Your store domain")
+    p_optimize.add_argument("competitor_domains", nargs="+", help="Competitor domains")
+    p_optimize.add_argument("-m", "--margin", type=float, default=0.3, help="Target profit margin (default: 0.3)")
+    p_optimize.add_argument("-a", "--aggressive", action="store_true", help="Aggressive pricing mode")
+    p_optimize.add_argument("-o", "--output", help="Output file path")
+    p_optimize.add_argument("-f", "--format", choices=["json", "csv"], default="json", help="Output format")
+    p_optimize.set_defaults(func=cmd_optimize_pricing)

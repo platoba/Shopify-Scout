@@ -1,8 +1,14 @@
-# Shopify Scout v2.0.0 🔍
+# Shopify Scout v6.0.0 🔍
 
 AI-powered Shopify store analysis, competitive intelligence, and niche opportunity detection.
 
 ## Features
+
+### Pricing Intelligence
+- 💰 **Price Optimizer** - Competitive pricing analysis with auto-discount recommendations
+- 📊 **Market Positioning** - Premium/competitive/budget tier classification
+- 🎯 **Smart Pricing** - Conservative vs aggressive pricing strategies
+- 📈 **Confidence Scoring** - AI-powered pricing confidence evaluation
 
 ### Core Analysis
 - 📊 **Store Analysis** - Full product catalog analysis with pricing, categories, vendors, and scoring
@@ -42,6 +48,15 @@ shopify-scout niche allbirds.com
 shopify-scout export allbirds.com -f html -o report.html
 
 # Batch analyze
+
+# Optimize pricing
+shopify-scout optimize-pricing mystore.com competitor1.com competitor2.com
+
+# Aggressive pricing mode
+shopify-scout optimize-pricing mystore.com competitor.com --aggressive
+
+# Export CSV for bulk import
+shopify-scout optimize-pricing mystore.com competitor.com -f csv -o pricing.csv
 shopify-scout batch stores.txt -d reports/
 ```
 
