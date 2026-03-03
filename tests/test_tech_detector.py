@@ -1,9 +1,8 @@
 """Tests for Shopify Scout tech detector module."""
-import pytest
 from app.tech_detector import (
     detect_theme, detect_apps, detect_payments,
     detect_currency, detect_locale, full_tech_scan,
-    format_tech_report, KNOWN_THEMES, APP_SIGNATURES,
+    format_tech_report,
 )
 
 

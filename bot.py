@@ -16,7 +16,7 @@ def main():
         raise ValueError("未设置 BOT_TOKEN!")
 
     print(f"\n{'='*50}")
-    print(f"  Shopify Scout v1.0 - AI选品工具")
+    print("  Shopify Scout v1.0 - AI选品工具")
     print(f"  AI: {'✅ ' + OPENAI_MODEL if OPENAI_API_KEY else '❌ 未配置'}")
     print(f"{'='*50}")
 

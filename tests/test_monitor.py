@@ -1,7 +1,5 @@
 """Tests for Shopify Scout monitor module."""
-import os
 import pytest
-import tempfile
 from unittest.mock import patch
 from app import monitor
 

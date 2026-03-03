@@ -1,5 +1,4 @@
 """Store data analysis: pricing, categories, trends, scoring."""
-from typing import Optional
 from datetime import datetime
 
 

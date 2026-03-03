@@ -4,7 +4,6 @@ import json
 import time
 import sqlite3
 import logging
-from typing import Optional
 from app.config import MONITOR_DB
 
 logger = logging.getLogger(__name__)

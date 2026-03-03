@@ -1,6 +1,4 @@
 """Multi-store comparison engine for competitive analysis."""
-import statistics
-from typing import Optional
 from datetime import datetime, timezone
 
 

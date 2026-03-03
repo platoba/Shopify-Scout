@@ -1,6 +1,5 @@
 """Tests for Shopify Scout CLI module."""
 import pytest
-import sys
 from unittest.mock import patch, MagicMock
 from app.cli import main, cmd_analyze, cmd_compare, cmd_niche, cmd_export, cmd_batch
 

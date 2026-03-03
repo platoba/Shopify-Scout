@@ -1,5 +1,4 @@
 """Tests for Shopify Scout analyzer module."""
-import pytest
 from app.analyzer import (
     analyze_prices, analyze_categories, analyze_tags,
     analyze_vendors, compute_store_score, full_analysis,

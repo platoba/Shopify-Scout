@@ -1,5 +1,4 @@
 """Tests for report_generator module."""
-import pytest
 
 
 def _make_analysis(domain="test.myshopify.com"):

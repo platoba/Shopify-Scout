@@ -1,5 +1,4 @@
 """Tests for Shopify Scout niche analyzer module."""
-import pytest
 from app.niche_analyzer import (
     analyze_niche, _compute_niche_score, _find_opportunities,
     _determine_positioning, _assess_diversity, _assess_freshness,

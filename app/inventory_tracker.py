@@ -10,7 +10,6 @@ import os
 import time
 import sqlite3
 import logging
-import statistics
 from datetime import datetime
 from typing import Optional
 

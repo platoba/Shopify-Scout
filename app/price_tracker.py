@@ -4,13 +4,11 @@ Tracks price history for every product variant across monitored stores.
 Supports: price drop/increase alerts, historical charts data, best-buy timing.
 """
 import os
-import json
 import time
 import sqlite3
 import logging
 import statistics
-from datetime import datetime, timedelta
-from typing import Optional
+from datetime import datetime
 
 from app.config import MONITOR_DB
 

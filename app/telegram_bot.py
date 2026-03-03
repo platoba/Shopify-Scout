@@ -3,7 +3,7 @@ import logging
 import requests
 from app.config import BOT_TOKEN
 from app.scraper import fetch_store_data, normalize_domain
-from app.analyzer import full_analysis, analyze_prices
+from app.analyzer import full_analysis
 from app.ai_advisor import generate_advice, compare_advice
 from app.monitor import add_watch, remove_watch, list_watches
 
@@ -57,7 +57,7 @@ def format_report(analysis: dict) -> str:
 
     tags = analysis.get("tags", {})
     if tags:
-        lines.append(f"\n🏷️ 热门标签:")
+        lines.append("\n🏷️ 热门标签:")
         lines.append(f"  {', '.join(list(tags.keys())[:12])}")
 
     vendors = analysis.get("vendors", {})
@@ -68,7 +68,7 @@ def format_report(analysis: dict) -> str:
 
     trend = analysis.get("trend", {})
     if trend:
-        lines.append(f"\n📈 上新趋势:")
+        lines.append("\n📈 上新趋势:")
         lines.append(f"  7天: {trend.get('last_7d', 0)} | 30天: {trend.get('last_30d', 0)} | 90天: {trend.get('last_90d', 0)}")
         lines.append(f"  月均上新: {trend.get('avg_per_month', 0)}款")
 
@@ -136,7 +136,7 @@ def handle_message(chat_id: int, msg_id: int, text: str):
         send(chat_id, "🧠 正在分析...", msg_id)
         data = fetch_store_data(args)
         if not data.get("product_count"):
-            send(chat_id, f"⚠️ 无法获取店铺数据", msg_id)
+            send(chat_id, "⚠️ 无法获取店铺数据", msg_id)
             return
         analysis = full_analysis(data)
         send(chat_id, format_report(analysis), msg_id)
@@ -150,7 +150,7 @@ def handle_message(chat_id: int, msg_id: int, text: str):
         send(chat_id, "⭐ 评分中...", msg_id)
         data = fetch_store_data(args)
         if not data.get("product_count"):
-            send(chat_id, f"⚠️ 无法获取店铺数据", msg_id)
+            send(chat_id, "⚠️ 无法获取店铺数据", msg_id)
             return
         analysis = full_analysis(data)
         s = analysis["score"]
@@ -185,7 +185,7 @@ def handle_message(chat_id: int, msg_id: int, text: str):
         if add_watch(domain, chat_id):
             send(chat_id, f"👀 已添加监控: {domain}", msg_id)
         else:
-            send(chat_id, f"⚠️ 添加失败", msg_id)
+            send(chat_id, "⚠️ 添加失败", msg_id)
 
     elif cmd == "/unwatch":
         if not args:
@@ -195,7 +195,7 @@ def handle_message(chat_id: int, msg_id: int, text: str):
         if remove_watch(domain, chat_id):
             send(chat_id, f"✅ 已取消监控: {domain}", msg_id)
         else:
-            send(chat_id, f"⚠️ 未找到该监控", msg_id)
+            send(chat_id, "⚠️ 未找到该监控", msg_id)
 
     elif cmd == "/watched":
         watches = list_watches(chat_id)

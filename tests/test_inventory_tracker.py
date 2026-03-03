@@ -1,6 +1,4 @@
 """Tests for inventory_tracker module."""
-import os
-import time
 import pytest
 
 

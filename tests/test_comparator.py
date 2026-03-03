@@ -1,5 +1,4 @@
 """Tests for Shopify Scout comparator module."""
-import pytest
 from app.comparator import (
     compare_stores, _store_summary, _rank_stores,
     _compare_prices, _compute_category_overlap, _find_gaps,

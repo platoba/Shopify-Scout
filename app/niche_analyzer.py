@@ -1,6 +1,4 @@
 """Niche scoring and opportunity analysis for Shopify stores."""
-import math
-from typing import Optional
 from datetime import datetime, timezone
 
 

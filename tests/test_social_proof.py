@@ -1,5 +1,4 @@
 """Tests for app.social_proof module."""
-import pytest
 from app.social_proof import (
     SocialProofDetector, ConversionElement, CompetitorBenchmark,
     detect_social_proof,

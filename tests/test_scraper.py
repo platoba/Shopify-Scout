@@ -1,5 +1,4 @@
 """Tests for Shopify Scout scraper module."""
-import pytest
 from unittest.mock import patch, MagicMock
 from app.scraper import normalize_domain, fetch_store_data
 

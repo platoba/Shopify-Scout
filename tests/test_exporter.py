@@ -1,8 +1,6 @@
 """Tests for Shopify Scout exporter module."""
 import os
 import json
-import pytest
-import tempfile
 from app.exporter import (
     export_json, export_csv, export_html, export_report,
     export_comparison_csv, _build_price_ranges,

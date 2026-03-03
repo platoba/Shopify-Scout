@@ -5,8 +5,6 @@ canonical URLs, image alt texts, page speed signals, and more.
 """
 import re
 import logging
-from typing import Optional
-from urllib.parse import urlparse, urljoin
 from datetime import datetime
 
 logger = logging.getLogger(__name__)

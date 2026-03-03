@@ -1,10 +1,6 @@
 """Tests for price_tracker module."""
-import os
 import time
-import sqlite3
-import tempfile
 import pytest
-from unittest.mock import patch
 
 
 @pytest.fixture(autouse=True)
@@ -224,7 +220,7 @@ class TestPendingAlerts:
 
 class TestDiscountPatterns:
     def test_finds_patterns(self):
-        from app.price_tracker import record_prices, detect_discount_patterns, _get_db
+        from app.price_tracker import detect_discount_patterns, _get_db
         # Insert discount records
         conn = _get_db()
         now = time.time()

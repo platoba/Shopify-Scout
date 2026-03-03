@@ -5,8 +5,6 @@ pricing strategy detection, and margin opportunity finder.
 """
 import logging
 import statistics
-from typing import Optional
-from datetime import datetime
 from collections import defaultdict
 
 logger = logging.getLogger(__name__)

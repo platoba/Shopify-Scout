@@ -206,7 +206,7 @@ def cmd_batch(args):
                 results.append(analysis)
                 print(f"    ✅ {data['product_count']} products, score {analysis.get('score', {}).get('score', '?')}")
             else:
-                print(f"    ⚠️ No products found")
+                print("    ⚠️ No products found")
         except Exception as e:
             print(f"    ❌ Error: {e}")
 
