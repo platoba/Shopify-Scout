@@ -1,8 +1,15 @@
-# Shopify Scout v6.0.0 🔍
+# Shopify Scout v7.0.0 🔍
 
 AI-powered Shopify store analysis, competitive intelligence, and niche opportunity detection.
 
 ## Features
+
+### Inventory Monitoring
+- 📦 **Inventory Monitor** - Competitor stock tracking with out-of-stock alerts
+- 🚨 **Change Detection** - Automatic alerts for stock-outs, restocks, and low inventory
+- 📊 **Health Analysis** - Overall inventory health scoring (excellent/good/fair/poor)
+- 🎯 **Opportunity Alerts** - Identify market gaps when competitors run out of stock
+
 
 ### Pricing Intelligence
 - 💰 **Price Optimizer** - Competitive pricing analysis with auto-discount recommendations
@@ -48,6 +55,13 @@ shopify-scout niche allbirds.com
 shopify-scout export allbirds.com -f html -o report.html
 
 # Batch analyze
+
+# Check inventory health
+shopify-scout inventory-check allbirds.com
+
+# Compare inventory snapshots
+shopify-scout inventory-compare snapshot1.json snapshot2.json
+
 
 # Optimize pricing
 shopify-scout optimize-pricing mystore.com competitor1.com competitor2.com

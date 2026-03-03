@@ -1,3 +1,30 @@
+## v7.0.0 (2026-03-03)
+
+### New Module: Inventory Monitor 📦
+- **`inventory_monitor.py`** — 竞品库存监控+断货预警系统
+  - 库存快照：拍摄竞品库存状态，记录每个variant的可用性和数量
+  - 变化检测：对比两次快照，自动识别断货/补货/低库存事件
+  - 断货预警：竞品断货时立即提醒，抓住市场空白期
+  - 补货监控：竞品补货时通知，关注其价格和促销策略
+  - 低库存预警：竞品库存≤10件时提醒，准备抢占市场
+  - 健康度分析：评估整体库存管理水平（excellent/good/fair/poor）
+  - 多格式报告：JSON报告 + 预警汇总
+  - CLI命令：
+    - `shopify-scout inventory-check <domain>` — 检查库存健康度
+    - `shopify-scout inventory-compare <prev.json> <curr.json>` — 对比快照生成预警
+
+### Use Cases
+- 竞品监控：每日定时抓取竞品库存，发现断货机会
+- 市场抢占：竞品断货时立即推广同类产品
+- 补货跟踪：竞品补货后关注其价格变化
+- 库存优化：学习竞品库存管理策略
+
+### Testing
+- 7 new test cases in `test_inventory_monitor.py` (100% pass rate)
+- Snapshot capture and comparison validation
+- Alert generation for out-of-stock/restocked/low-stock events
+- Health score calculation (excellent/good/fair/poor)
+
 ## v6.0.0 (2026-03-02)
 
 ### New Module: Price Optimizer 💰

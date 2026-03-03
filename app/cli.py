@@ -385,3 +385,16 @@ def cmd_traffic(args):
     p_optimize.add_argument("-o", "--output", help="Output file path")
     p_optimize.add_argument("-f", "--format", choices=["json", "csv"], default="json", help="Output format")
     p_optimize.set_defaults(func=cmd_optimize_pricing)
+
+    # inventory-check
+    p_inventory = subparsers.add_parser("inventory-check", help="Check inventory health")
+    p_inventory.add_argument("domain", help="Store domain (e.g. allbirds.com)")
+    p_inventory.add_argument("-o", "--output", help="Output JSON file path")
+    p_inventory.set_defaults(func=lambda args: __import__('app.cli_inventory', fromlist=['cmd_inventory_check']).cmd_inventory_check(args))
+
+    # inventory-compare
+    p_inv_cmp = subparsers.add_parser("inventory-compare", help="Compare inventory snapshots")
+    p_inv_cmp.add_argument("previous", help="Previous snapshot JSON file")
+    p_inv_cmp.add_argument("current", help="Current snapshot JSON file")
+    p_inv_cmp.add_argument("-o", "--output", help="Output alert report JSON")
+    p_inv_cmp.set_defaults(func=lambda args: __import__('app.cli_inventory', fromlist=['cmd_inventory_compare']).cmd_inventory_compare(args))
